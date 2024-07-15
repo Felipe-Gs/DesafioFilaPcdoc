@@ -66,3 +66,19 @@ h2 {
 .btn-primary:hover {
   background-color: #0056b3;
 }
+
+.btn-secondy {
+  background-color: green;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 10px;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-secondy:hover {
+  background-color: #00a83d;
+}
