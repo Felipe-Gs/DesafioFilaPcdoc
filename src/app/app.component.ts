@@ -15,10 +15,32 @@ export class AppComponent {
   novoCliente: Client = {
     nome: '',
     contato: '',
-    tipoAtendimento: 'Normal',
+    tipoAtendimento: '',
   };
 
-  filaClientes: Client[] = [];
+  filaClientes: Client[] = [
+    {
+      nome: 'Felipe Silva',
+      contato: 'contatofleipe@gmail.com',
+      tipoAtendimento: 'Prioritário',
+    },
+    {
+      nome: 'Silva Pedro',
+      contato: 'Silva@gmail.com',
+      tipoAtendimento: 'Gestantes',
+    },
+    {
+      nome: 'Lucas sabino',
+      contato: 'sabino@gmail.com',
+      tipoAtendimento: 'Idosos',
+    },
+    { nome: 'Ana Souza', contato: 'ana@gmail.com', tipoAtendimento: 'PCD' },
+    {
+      nome: 'Carlos Lima',
+      contato: 'carlos@gmail.com',
+      tipoAtendimento: 'Encaminhados pelo médico',
+    },
+  ];
 
   adicionarCliente() {
     this.filaClientes.push({ ...this.novoCliente });
