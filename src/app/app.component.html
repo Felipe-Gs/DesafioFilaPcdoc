@@ -2,35 +2,35 @@
   <div class="content">
     <h1>Desafio Fila de Prioridade</h1>
     <h2>Adicionar Cliente</h2>
-  <form (ngSubmit)="adicionarCliente()">
-    <div class="form-group">
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="contato">Contato:</label>
-      <input type="text" id="contato" name="contato" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="tipoAtendimento">Tipo de Atendimento:</label>
-      <select id="tipoAtendimento" name="tipoAtendimento" class="form-control" required>
-        <option value="Prioritário">Prioritário</option>
-        <option value="Normal">Gestantes</option>
-        <option value="Normal">Idosos</option>
-        <option value="Normal">PCD</option>
-        <option value="Normal">Encaminhados pelo médico</option>
-        <option value="Normal">Casos gerais</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Incluir na Fila</button>
-  </form>
+    <form (ngSubmit)="adicionarCliente()">
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="contato">Contato:</label>
+        <input type="text" id="contato" name="contato" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="tipoAtendimento">Tipo de Atendimento:</label>
+        <select id="tipoAtendimento" name="tipoAtendimento" class="form-control" required>
+          <option value="Prioritário">Prioritário</option>
+          <option value="Normal">Gestantes</option>
+          <option value="Normal">Idosos</option>
+          <option value="Normal">PCD</option>
+          <option value="Normal">Encaminhados pelo médico</option>
+          <option value="Normal">Casos gerais</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Incluir na Fila</button>
+    </form>
 
-  <h2>Fila de Espera</h2>
-  <ul class="list-group">
-    <li *ngFor="let cliente of filaClientes" class="list-group-item">
-      {{ cliente.nome }} - {{ cliente.contato }} - {{ cliente.tipoAtendimento }}
-    </li>
-  </ul>
+    <h2>Fila de Espera</h2>
+    <ul class="list-group">
+      <li *ngFor="let cliente of filaClientes" class="list-group-item">
+        {{ cliente.nome }} - {{ cliente.contato }} - {{ cliente.tipoAtendimento }}
+      </li>
+    </ul>
   </div>
 </main>
 
