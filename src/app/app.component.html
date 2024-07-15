@@ -5,21 +5,21 @@
     <form (ngSubmit)="adicionarCliente()">
       <div class="form-group">
         <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" class="form-control" required>
+        <input type="text" id="nome" [(ngModel)] ="novoCliente.nome" name="nome" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="contato">Contato:</label>
-        <input type="text" id="contato" name="contato" class="form-control" required>
+        <input type="text" id="contato" [(ngModel)] ="novoCliente.contato" name="contato" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="tipoAtendimento">Tipo de Atendimento:</label>
-        <select id="tipoAtendimento" name="tipoAtendimento" class="form-control" required>
+        <select id="tipoAtendimento" [(ngModel)] ="novoCliente.tipoAtendimento" name="tipoAtendimento" class="form-control" required>
           <option value="Prioritário">Prioritário</option>
-          <option value="Normal">Gestantes</option>
-          <option value="Normal">Idosos</option>
-          <option value="Normal">PCD</option>
-          <option value="Normal">Encaminhados pelo médico</option>
-          <option value="Normal">Casos gerais</option>
+          <option value="Gestantes">Gestantes</option>
+          <option value="Idosos">Idosos</option>
+          <option value="PCD">PCD</option>
+          <option value="Encaminhados">Encaminhados pelo médico</option>
+          <option value="gerais">Casos gerais</option>
         </select>
       </div>
       <button type="submit" class="btn btn-primary">Incluir na Fila</button>
