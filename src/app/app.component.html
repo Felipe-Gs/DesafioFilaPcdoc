@@ -14,7 +14,6 @@
       <div class="form-group">
         <label for="tipoAtendimento">Tipo de Atendimento:</label>
         <select id="tipoAtendimento" [(ngModel)] ="novoCliente.tipoAtendimento" name="tipoAtendimento" class="form-control" required>
-          <option value="Prioritário">Prioritário</option>
           <option value="Gestantes">Gestantes</option>
           <option value="Idosos">Idosos</option>
           <option value="PCD">PCD</option>
@@ -22,15 +21,18 @@
           <option value="gerais">Casos gerais</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary">Incluir na Fila</button>
+      <button type="submit"  class="btn btn-primary">Incluir na Fila</button>
     </form>
 
     <h2>Fila de Espera</h2>
-    <ul class="list-group">
-      <li *ngFor="let cliente of filaClientes" class="list-group-item">
-        {{ cliente.nome }} - {{ cliente.contato }} - {{ cliente.tipoAtendimento }}
-      </li>
-    </ul>
+    <div>
+        <ul>
+          <li *ngFor="let cliente of filaClientes" class="list-group-item">
+            {{ cliente.nome }} - {{ cliente.contato }} - {{ cliente.tipoAtendimento }} <br>
+            <button type="submit"  class="btn btn-secondy">Atendido</button>
+          </li>
+        </ul>
+    </div>
   </div>
 </main>
 
