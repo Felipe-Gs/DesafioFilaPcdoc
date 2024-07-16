@@ -15,7 +15,7 @@ interface Client {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   // guardar os dados que vem
   clientesAtendidos: Client[] = [];
   clientes: any[] = [];
@@ -23,11 +23,16 @@ export class AppComponent {
 
   constructor(private filaService: FilaService) {}
 
+  ngOnInit(): void {
+    this.buscarUsuarios();
+    this.buscarAtendidos();
+    this.ordenarFila();
+  }
+
   adicionarDadosMockados(): void {
     this.filaService.adicionarDadosMockados().subscribe(
       (response) => {
         console.log('Dados mockados adicionados com sucesso:', response);
-        // Lógica adicional se necessário
       },
       (error) => {
         console.error('Erro ao adicionar dados mockados:', error);
@@ -50,6 +55,7 @@ export class AppComponent {
   adicionarUsuario(): void {
     this.filaService.adicionarUsuario(this.novoCliente).subscribe(
       (response) => {
+        this.ordenarFila();
         this.buscarUsuarios();
         console.log('Dados adicionados com sucesso:', response);
         this.novoCliente = {
@@ -76,6 +82,20 @@ export class AppComponent {
     this.filaService.buscarUsuarios().subscribe(
       (response) => {
         this.clientes = response;
+        console.log('Clientes carregados com sucesso:', response);
+        this.ordenarFila();
+      },
+      (error) => {
+        console.error('Erro ao carregar clientes:', error);
+        this.ordenarFila();
+      }
+    );
+  }
+
+  buscarAtendidos() {
+    this.filaService.buscarAtendidos().subscribe(
+      (response) => {
+        this.clientesAtendidos = response;
         console.log('Clientes carregados com sucesso:', response);
       },
       (error) => {
@@ -141,17 +161,6 @@ export class AppComponent {
     },
   ];
 
-  adicionarCliente() {
-    this.filaClientes.push({ ...this.novoCliente });
-    this.ordenarFila();
-    this.novoCliente = {
-      nome: '',
-      contato: '',
-      tipoAtendimento: '',
-      atendido: false,
-    };
-  }
-
   // Exemplo: Se alguém do tipo Encaminhados pelo médico(nível
   // dois) for inserido na fila ele será prioridade e estará acima na
   // listagem sobre todos do tipo Casos gerais (nível 3).
@@ -164,7 +173,7 @@ export class AppComponent {
       gerais: 1,
     };
 
-    this.filaClientes.sort((a, b) => {
+    this.clientes.sort((a, b) => {
       const prioridadeA = prioridades[a.tipoAtendimento];
       const prioridadeB = prioridades[b.tipoAtendimento];
 
@@ -179,6 +188,4 @@ export class AppComponent {
   // nome na lista um botão (ATENDIDO), que o remove da
   // listagem(fila).Seria interessante conseguir visualizar as pessoas
   // que já foram atendidas
-
-  visualizarAtendidos() {}
 }
