@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { FilaService } from './services/fila.service';
 
 interface Client {
   nome: string;
@@ -13,6 +16,85 @@ interface Client {
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  // guardar os dados que vem
+  clientesAtendidos: Client[] = [];
+  clientes: any[] = [];
+  mensagemTesteConexao: String = '';
+
+  constructor(private filaService: FilaService) {}
+
+  adicionarDadosMockados(): void {
+    this.filaService.adicionarDadosMockados().subscribe(
+      (response) => {
+        console.log('Dados mockados adicionados com sucesso:', response);
+        // Lógica adicional se necessário
+      },
+      (error) => {
+        console.error('Erro ao adicionar dados mockados:', error);
+      }
+    );
+  }
+
+  testeConexao(): void {
+    this.filaService.testeDeConexao().subscribe(
+      (response) => {
+        console.log('Teste de conexao funcionando', response);
+        this.mensagemTesteConexao = response;
+      },
+      (error) => {
+        console.error('Erro ao conectar com o banco:', error);
+      }
+    );
+  }
+
+  adicionarUsuario(): void {
+    this.filaService.adicionarUsuario(this.novoCliente).subscribe(
+      (response) => {
+        this.buscarUsuarios();
+        console.log('Dados adicionados com sucesso:', response);
+        this.novoCliente = {
+          nome: '',
+          contato: '',
+          tipoAtendimento: '',
+          atendido: false,
+        };
+      },
+      (error) => {
+        console.error('Erro ao adicionar cliente:', error);
+        this.novoCliente = {
+          nome: '',
+          contato: '',
+          tipoAtendimento: '',
+          atendido: false,
+        };
+        this.buscarUsuarios();
+      }
+    );
+  }
+
+  buscarUsuarios(): void {
+    this.filaService.buscarUsuarios().subscribe(
+      (response) => {
+        this.clientes = response;
+        console.log('Clientes carregados com sucesso:', response);
+      },
+      (error) => {
+        console.error('Erro ao carregar clientes:', error);
+      }
+    );
+  }
+
+  // carregarClientesAtendidos(): void {
+  //   this.http.get<Client[]>('http://localhost:8080/users/test').subscribe(
+  //     (response) => {
+  //       this.clientesAtendidos = response;
+  //     },
+  //     (error) => {
+  //       console.error('Erro ao carregar clientes atendidos:', error);
+  //     }
+  //   );
+  // }
+
   novoCliente: Client = {
     nome: '',
     contato: '',
