@@ -3,9 +3,7 @@
     <h1>Desafio Fila de Prioridade</h1>
     <div style="justify-content: center; align-items: center; display: flex;">
       <img style="align-self: center; width: 300px;" src="../assets/atendimentoPreferencial.png" alt="Imagen relacionada com atendimentoPreferencial">
-
     </div>
-
     <h2>Adicionar Cliente</h2>
     <h2>{{mensagemTesteConexao}}</h2>
     <button (click)="adicionarDadosMockados()" class="btn btn-primary">Adicionar Dados Mockados</button>
@@ -31,16 +29,28 @@
       </div>
       <button type="submit"  class="btn btn-primary">Incluir na Fila</button>
       <button (click)="buscarUsuarios()"  class="btn btn-primary">Buscar dados</button>
+      <button (click)="ordenarFila()"  class="btn btn-primary">Ordenar lista</button>
     </form>
 
     <h2>Fila de Espera</h2>
     <div>
         <ul>
-          <li *ngFor="let cliente of clientes" class="list-group-item">
+          <li *ngFor="let cliente of clientes">
             {{ cliente.nome }} - {{ cliente.contato }} - {{ cliente.tipoAtendimento }} <br>
-            <button type="submit"  class="btn btn-secondy">{{cliente.atendido}}</button>
+            <button type="submit"  class="btn btn-secondy">{{cliente.atendido? 'Atendido':'Não antendido'}}</button>
           </li>
         </ul>
+    </div>
+    <h2>Atendidos</h2>
+    <button (click)="buscarAtendidos()" type="submit"  class="btn btn-secondy">Buscar atendidos</button>
+    <div>
+        <ul>
+          <li *ngFor="let cliente of clientesAtendidos">
+            {{ cliente.nome }} - {{ cliente.contato }} - {{ cliente.tipoAtendimento }} <br>
+            <button type="submit"  class="btn btn-secondy">{{cliente.atendido? 'Atendido':'Não antendido'}}</button>
+          </li>
+        </ul>
+
     </div>
   </div>
 </main>
