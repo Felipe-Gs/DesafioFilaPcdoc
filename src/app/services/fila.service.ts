@@ -25,4 +25,8 @@ export class FilaService {
   buscarUsuarios(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}`);
   }
+
+  buscarAtendidos(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/atendidos`);
+  }
 }
