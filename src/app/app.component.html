@@ -7,7 +7,10 @@
     </div>
 
     <h2>Adicionar Cliente</h2>
-    <form (ngSubmit)="adicionarCliente()">
+    <h2>{{mensagemTesteConexao}}</h2>
+    <button (click)="adicionarDadosMockados()" class="btn btn-primary">Adicionar Dados Mockados</button>
+    <button (click)="testeConexao()" class="btn btn-primary">Teste de conexão</button>
+    <form (ngSubmit)="adicionarUsuario()">
       <div class="form-group">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" [(ngModel)] ="novoCliente.nome" name="nome" class="form-control" required>
@@ -27,14 +30,15 @@
         </select>
       </div>
       <button type="submit"  class="btn btn-primary">Incluir na Fila</button>
+      <button (click)="buscarUsuarios()"  class="btn btn-primary">Buscar dados</button>
     </form>
 
     <h2>Fila de Espera</h2>
     <div>
         <ul>
-          <li *ngFor="let cliente of filaClientes" class="list-group-item">
+          <li *ngFor="let cliente of clientes" class="list-group-item">
             {{ cliente.nome }} - {{ cliente.contato }} - {{ cliente.tipoAtendimento }} <br>
-            <button type="submit"  class="btn btn-secondy">Atendido</button>
+            <button type="submit"  class="btn btn-secondy">{{cliente.atendido}}</button>
           </li>
         </ul>
     </div>
