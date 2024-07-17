@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   clientesAtendidos: Client[] = [];
   clientes: any[] = [];
   mensagemTesteConexao: String = '';
+  mensagemErro: String = '';
 
   constructor(private filaService: FilaService) {}
 
@@ -53,6 +54,13 @@ export class AppComponent implements OnInit {
   }
 
   adicionarUsuario(): void {
+    if (
+      this.novoCliente.nome.length == 0 ||
+      this.novoCliente.tipoAtendimento.length == 0
+    ) {
+      this.mensagemErro = 'Preencha os campos obrigatórios';
+      return;
+    }
     this.filaService.adicionarUsuario(this.novoCliente).subscribe(
       (response) => {
         this.ordenarFila();
@@ -64,6 +72,7 @@ export class AppComponent implements OnInit {
           tipoAtendimento: '',
           atendido: false,
         };
+        this.mensagemErro = '';
       },
       (error) => {
         console.error('Erro ao adicionar cliente:', error);
@@ -73,6 +82,7 @@ export class AppComponent implements OnInit {
           tipoAtendimento: '',
           atendido: false,
         };
+        this.mensagemErro = 'Erro ao adicioanar cliente';
         this.buscarUsuarios();
       }
     );
@@ -182,6 +192,18 @@ export class AppComponent implements OnInit {
 
       return prioridadeB - prioridadeA;
     });
+  }
+
+  mudarAtendido(id: number): void {
+    this.filaService.mudarAtendido(id).subscribe(
+      (response) => {
+        console.log(response);
+        this.buscarUsuarios();
+      },
+      (error) => {
+        console.error('Erro ao atualizar status de atendimento:', error);
+      }
+    );
   }
 
   // Somente o próximo cliente a ser atendido recebe ao lado do seu

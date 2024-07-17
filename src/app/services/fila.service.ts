@@ -23,10 +23,14 @@ export class FilaService {
   }
 
   buscarUsuarios(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}`);
+    return this.http.get<any[]>(`${this.baseUrl}/naoAtendidos`);
   }
 
   buscarAtendidos(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/atendidos`);
+  }
+
+  mudarAtendido(id: number): Observable<string> {
+    return this.http.put<string>(`${this.baseUrl}/MudarAtendido/${id}`, {});
   }
 }

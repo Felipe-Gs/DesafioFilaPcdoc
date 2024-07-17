@@ -26,6 +26,7 @@
           <option value="Encaminhados">Encaminhados pelo médico</option>
           <option value="gerais">Casos gerais</option>
         </select>
+        <p style="color: red;">{{mensagemErro}}</p>
       </div>
       <button type="submit"  class="btn btn-primary">Incluir na Fila</button>
       <button (click)="buscarUsuarios()"  class="btn btn-primary">Buscar dados</button>
@@ -37,7 +38,7 @@
         <ul>
           <li *ngFor="let cliente of clientes">
             {{ cliente.nome }} - {{ cliente.contato }} - {{ cliente.tipoAtendimento }} <br>
-            <button type="submit"  class="btn btn-secondy">{{cliente.atendido? 'Atendido':'Não antendido'}}</button>
+            <button (click)="mudarAtendido(cliente.id)" type="submit"  class="btn btn-secondy">{{cliente.atendido? 'Atendido':'Não antendido'}}</button>
           </li>
         </ul>
     </div>
